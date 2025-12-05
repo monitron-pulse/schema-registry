@@ -4,7 +4,7 @@
     "type": "object",
     "properties": {
         "unit": {
-            "type": "integer"
+            "type": "string"
         },
         "min_periods": {
             "type": "integer"
