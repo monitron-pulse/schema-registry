@@ -1,0 +1,35 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "unit": {
+            "type": "integer"
+        },
+        "min_periods": {
+            "type": "integer"
+        },
+        "data_frequency": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "sliding_window": {
+            "type": "string",
+            "enum": [
+                "MANDATORY"
+            ]
+        },
+        "interpolate_missing": {
+            "type": "boolean"
+        }
+    },
+    "required": [
+        "unit",
+        "min_periods",
+        "data_frequency",
+        "sliding_window",
+        "interpolate_missing"
+    ],
+    "additionalProperties": false
+}
