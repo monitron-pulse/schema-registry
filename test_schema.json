@@ -1,25 +1,21 @@
 {
     "$id": "myschema",
     "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Time Series Configuration",
     "type": "object",
     "properties": {
         "unit": {
-            "type": "string"
+            "$ref": "./common-types.schema.json#/definitions/unitType"
         },
         "min_periods": {
-            "type": "integer"
+            "type": "integer",
+            "minimum": 1
         },
         "data_frequency": {
-            "type": [
-                "string",
-                "null"
-            ]
+            "$ref": "./common-types.schema.json#/definitions/nullableString"
         },
         "sliding_window": {
-            "type": "string",
-            "enum": [
-                "MANDATORY"
-            ]
+            "$ref": "./common-types.schema.json#/definitions/slidingWindowType"
         },
         "interpolate_missing": {
             "type": "boolean"

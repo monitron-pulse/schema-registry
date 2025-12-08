@@ -1,0 +1,45 @@
+{
+    "$id": "./common-types.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Common Types",
+    "description": "Reusable definitions for time series related schemas.",
+    "type": "object",
+    "definitions": {
+        "unitType": {
+            "type": "string",
+            "enum": [
+                "seconds",
+                "minutes",
+                "hours",
+                "days"
+            ],
+            "description": "Allowed time units.",
+            "examples": [
+                "minutes"
+            ]
+        },
+        "slidingWindowType": {
+            "type": "string",
+            "enum": [
+                "MANDATORY",
+                "OPTIONAL"
+            ],
+            "description": "Sliding window mode.",
+            "examples": [
+                "MANDATORY"
+            ]
+        },
+        "nullableString": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "A string or null value.",
+            "examples": [
+                "daily",
+                null
+            ]
+        }
+    },
+    "additionalProperties": false
+}
