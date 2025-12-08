@@ -5,17 +5,17 @@
     "type": "object",
     "properties": {
         "unit": {
-            "$ref": "./common-types.schema.json#/definitions/unitType"
+            "$ref": "https://raw.githubusercontent.com/monitron-pulse/schema-registry/refs/heads/master/common-types.schema.json#/definitions/unitType"
         },
         "min_periods": {
             "type": "integer",
             "minimum": 1
         },
         "data_frequency": {
-            "$ref": "./common-types.schema.json#/definitions/nullableString"
+            "$ref": "https://raw.githubusercontent.com/monitron-pulse/schema-registry/refs/heads/master/common-types.schema.json#/definitions/nullableString"
         },
         "sliding_window": {
-            "$ref": "./common-types.schema.json#/definitions/slidingWindowType"
+            "$ref": "https://raw.githubusercontent.com/monitron-pulse/schema-registry/refs/heads/master/common-types.schema.json#/definitions/slidingWindowType"
         },
         "interpolate_missing": {
             "type": "boolean"
