@@ -30,7 +30,6 @@
         "email": {
             "type": "string",
             "description": "User's email address.",
-            "format": "email",
             "examples": [
                 "john@example.com"
             ]
