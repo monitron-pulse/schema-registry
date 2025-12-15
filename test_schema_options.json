@@ -1,0 +1,191 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.com/schemas/user-profile.json",
+    "title": "User Profile",
+    "description": "Represents a user profile including personal information, roles, and optional preferences.",
+    "type": "object",
+    "required": [
+        "id",
+        "name",
+        "email",
+        "role"
+    ],
+    "properties": {
+        "id": {
+            "type": "string",
+            "description": "Unique user ID (UUID).",
+            "format": "uuid",
+            "examples": [
+                "1f3d7e5c-7c42-4db1-9dd3-039ff9b276a8"
+            ]
+        },
+        "name": {
+            "type": "string",
+            "description": "Full name of the user.",
+            "minLength": 3,
+            "maxLength": 100,
+            "examples": [
+                "John Doe"
+            ]
+        },
+        "email": {
+            "type": "string",
+            "description": "User's email address.",
+            "format": "email",
+            "examples": [
+                "john@example.com"
+            ]
+        },
+        "age": {
+            "type": "integer",
+            "description": "Age of the user.",
+            "minimum": 0,
+            "maximum": 150,
+            "examples": [
+                30
+            ]
+        },
+        "role": {
+            "description": "User role with predefined values.",
+            "type": "string",
+            "enum": [
+                "admin",
+                "editor",
+                "viewer"
+            ],
+            "examples": [
+                "admin"
+            ]
+        },
+        "preferences": {
+            "type": "object",
+            "description": "User-specific settings.",
+            "properties": {
+                "theme": {
+                    "type": "string",
+                    "enum": [
+                        "light",
+                        "dark"
+                    ],
+                    "default": "light",
+                    "description": "UI theme."
+                },
+                "notifications": {
+                    "type": "object",
+                    "description": "Notification settings.",
+                    "properties": {
+                        "email": {
+                            "type": "boolean",
+                            "default": true
+                        },
+                        "sms": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "required": [
+                        "email",
+                        "sms"
+                    ]
+                }
+            }
+        },
+        "tags": {
+            "type": "array",
+            "description": "List of free-form tags.",
+            "items": {
+                "type": "string",
+                "minLength": 1
+            },
+            "uniqueItems": true,
+            "examples": [
+                [
+                    "admin",
+                    "beta-user"
+                ]
+            ]
+        },
+        "address": {
+            "$ref": "#/$defs/address"
+        },
+        "accountStatus": {
+            "description": "Account status (additional rules depending on age).",
+            "type": "string",
+            "enum": [
+                "active",
+                "inactive",
+                "suspended"
+            ]
+        }
+    },
+    "if": {
+        "properties": {
+            "age": {
+                "minimum": 18
+            }
+        }
+    },
+    "then": {
+        "properties": {
+            "accountStatus": {
+                "enum": [
+                    "active",
+                    "inactive",
+                    "suspended",
+                    "restricted"
+                ]
+            }
+        }
+    },
+    "else": {
+        "properties": {
+            "accountStatus": {
+                "enum": [
+                    "active"
+                ]
+            }
+        }
+    },
+    "$defs": {
+        "address": {
+            "type": "object",
+            "description": "Postal address.",
+            "properties": {
+                "street": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9äöüÄÖÜß .-]+$",
+                    "description": "Street including house number."
+                },
+                "city": {
+                    "type": "string",
+                    "description": "City name."
+                },
+                "zip": {
+                    "type": "string",
+                    "description": "Postal code.",
+                    "pattern": "^[0-9]{5}$"
+                },
+                "country": {
+                    "type": "string",
+                    "description": "Country.",
+                    "default": "DE"
+                }
+            },
+            "required": [
+                "street",
+                "city",
+                "zip"
+            ]
+        }
+    },
+    "examples": [
+        {
+            "id": "52c8fe6d-23d7-4f52-bbcd-1fa123e4f912",
+            "name": "Anna Example",
+            "email": "anna@example.com",
+            "age": 16,
+            "role": "viewer",
+            "accountStatus": "active"
+        }
+    ]
+}
