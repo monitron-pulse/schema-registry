@@ -14,7 +14,6 @@
         "id": {
             "type": "string",
             "description": "Unique user ID (UUID).",
-            "format": "uuid",
             "examples": [
                 "1f3d7e5c-7c42-4db1-9dd3-039ff9b276a8"
             ]
