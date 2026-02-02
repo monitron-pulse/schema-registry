@@ -1,0 +1,57 @@
+{
+    "$id": "gradient",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Gradient Time Series Configuration",
+    "type": "object",
+    "properties": {
+        "interpolate_missing": {
+            "type": "boolean"
+        },
+        "data_frequency": {
+            "type": "string"
+        },
+        "min_periods": {
+            "type": "integer",
+            "minimum": 1
+        },
+        "sliding_window": {
+            "type": "string"
+        },
+        "mode": {
+            "type": "string",
+            "enum": [
+                "sum",
+                "avg",
+                "min",
+                "max"
+            ],
+            "default": "sum"
+        }
+    },
+    "required": [
+        "min_periods",
+        "sliding_window"
+    ],
+    "additionalProperties": false,
+    "allOf": [
+        {
+            "if": {
+                "required": [
+                    "interpolate_missing"
+                ]
+            },
+            "then": {
+                "required": [
+                    "data_frequency"
+                ]
+            },
+            "else": {
+                "not": {
+                    "required": [
+                        "data_frequency"
+                    ]
+                }
+            }
+        }
+    ]
+}
