@@ -2,19 +2,44 @@
     "$id": "linear_function_schema",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "Modified Time Series Configuration",
+    "description": "Configuration for applying a linear transformation to a time series, with optional interpolation of missing values using a pandas-compatible time frequency.",
     "type": "object",
     "properties": {
         "interpolate_missing": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Whether missing data points in the time series should be interpolated before applying the linear transformation.",
+            "examples": [
+                true,
+                false
+            ]
         },
         "data_frequency": {
-            "type": "string"
+            "type": "string",
+            "description": "Time interval of the series expressed as a pandas Timedelta-compatible string. Required when interpolate_missing is enabled (e.g., '1D', '15min', '2H').",
+            "examples": [
+                "1D",
+                "15min",
+                "2H",
+                "30S"
+            ]
         },
         "factor": {
-            "type": "number"
+            "type": "number",
+            "description": "Multiplicative factor applied to each data point in the time series.",
+            "examples": [
+                1.0,
+                0.5,
+                2.5
+            ]
         },
         "offset": {
-            "type": "number"
+            "type": "number",
+            "description": "Additive offset applied after scaling each data point.",
+            "examples": [
+                0,
+                10,
+                -3.2
+            ]
         }
     },
     "required": [
@@ -41,6 +66,18 @@
                     ]
                 }
             }
+        }
+    ],
+    "examples": [
+        {
+            "factor": 1.1,
+            "offset": 0
+        },
+        {
+            "interpolate_missing": true,
+            "data_frequency": "1D",
+            "factor": 0.75,
+            "offset": 2
         }
     ]
 }

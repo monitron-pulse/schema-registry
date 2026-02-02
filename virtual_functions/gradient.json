@@ -2,20 +2,45 @@
     "$id": "gradient",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "Gradient Time Series Configuration",
+    "description": "Configuration for computing gradients over a time series using a sliding time window, with optional interpolation of missing values.",
     "type": "object",
     "properties": {
         "interpolate_missing": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Whether missing data points in the time series should be interpolated prior to gradient computation.",
+            "examples": [
+                true,
+                false
+            ]
         },
         "data_frequency": {
-            "type": "string"
+            "type": "string",
+            "description": "Time interval of the time series expressed as a pandas Timedelta-compatible string. Required when interpolate_missing is enabled (e.g., '1D', '15min').",
+            "examples": [
+                "1D",
+                "15min",
+                "2H",
+                "30S"
+            ]
         },
         "min_periods": {
             "type": "integer",
-            "minimum": 1
+            "minimum": 1,
+            "description": "Minimum number of observations in the sliding window required to compute a gradient.",
+            "examples": [
+                1,
+                2,
+                5
+            ]
         },
         "sliding_window": {
-            "type": "string"
+            "type": "string",
+            "description": "Size of the sliding window expressed as a pandas Timedelta-compatible string used for gradient calculation (e.g., '7D', '1H').",
+            "examples": [
+                "7D",
+                "1H",
+                "30min"
+            ]
         }
     },
     "required": [
@@ -42,6 +67,18 @@
                     ]
                 }
             }
+        }
+    ],
+    "examples": [
+        {
+            "min_periods": 3,
+            "sliding_window": "7D"
+        },
+        {
+            "interpolate_missing": true,
+            "data_frequency": "1D",
+            "min_periods": 5,
+            "sliding_window": "14D"
         }
     ]
 }
